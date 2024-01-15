@@ -1,63 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MTW App Template</title>
-    <!--
-        The tailwind CDN is designed for development purposes only, and is not the best choice for production.
-        Read more here: https://tailwindcss.com/docs/installation 
-    -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- example for dark theme styling when using tailwind cdn -->
+    <title>Simple Calculator</title>
     <style>
-        /*examples for dark/light themes*/
-        .dark .dark\:text-white {
-            color: #fff;
-        }
-        .dark .dark\:bg-gray-800 {
-            background-color: #1f2937;
-        }
-        .light .light\:text-black {
-            color: #000;
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
         }
 
-        /*add your custom css rules here*/
+        #calculator {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            font-size: 16px;
+            text-align: center
+        }
+
+        button {
+            width: 30%;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffc0cb; /* Pink color */
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        #equals {
+            width: 100%;
+        }
+
+        .title {
+            color: red;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .operators {
+            width: 100%;
+        }
     </style>
 </head>
+<body>
 
-<body class="dark:text-white light:text-black">
+    <div id="calculator">
+        <div class="title">Calculator</div>
+        <input type="text" id="display" readonly   placeholder="Temporary Display">
+        
+        <div class="row">
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+        </div>
+        
+        <div class="row">
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+        </div>
+        
+        <div class="row">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+        </div>
 
-    <!-- your app code goes here -->
+        <div class="row">
+            <button>0</button>
+            <button>C</button>
+            <button>=</button>
+        </div>
+        
+        <div class="row operators">
+            <button>+</button>
+            <button>-</button>
+            <button>*</button>
+            <button>/</button>
+        </div>
+    </div>
 
-    <!-- special scripts for integration in MTW gallery - must be placed at the bottom of the HTML after your code -->
-    <script>
-        // custom config for the MTW app 
-        const mtwAppConfig = {
-            border: true // app border in the MTW page                    
-        }
 
-        ///////////////////////////////////////////////////////
-        // implement this functions in order to use private API        
-        const sendPrivateApiRequest = async () => {
-            // your code here:
-            // sendRequestToParent({ cat: 'getAssets' })
-        }        
-
-        const acceptPrivateApiResponse = async (data) => {
-            // process received data here:
-            // console.log(data)
-        }
-
-        // use this in order to send on document load
-        document.addEventListener('DOMContentLoaded', () => {
-            // your code here:
-            //sendRequestToParent({ method: 'getAssets' })
-        })
-
-    </script>
-    <script src="https://morethanwallet.com/appstore/index.js"></script>
 </body>
-
 </html>
