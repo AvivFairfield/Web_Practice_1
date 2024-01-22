@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Calculator</title>
+    <title>Calculator</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            margin-top: 50px;
+            margin: 50px 0;
+            background-color: #222;
+            color: #fff;
         }
 
         #calculator {
-            width: 300px;
+            width: 420px;
             margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
+            padding: 25px;
+            background-color: #333;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         }
 
         input {
@@ -25,81 +27,206 @@
             padding: 10px;
             margin-bottom: 10px;
             box-sizing: border-box;
-            font-size: 16px;
-            text-align: center
+            font-size: 20px;
+            text-align: right;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            background-color: #444;
+            color: #fff;
         }
 
         button {
-            width: 30%;
-            padding: 10px;
-            font-size: 16px;
+            width: 28%;
+            padding: 15px;
+            font-size: 18px;
+            margin: 5px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, color 0.3s;
+            border: 1px solid #555;
+            border-radius: 5px;
+            outline: none;
+            background-color: #666;
+            color: #fff;
         }
 
         button:hover {
-            background-color: #ffc0cb; /* Pink color */
+            background-color: #175464;
+            color: #fff;
         }
 
         .row {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             margin-bottom: 10px;
         }
 
-        #equals {
-            width: 100%;
-        }
-
         .title {
-            color: red;
-            font-size: 20px;
+            color: #e44d26;
+            font-size: 24px;
             margin-bottom: 10px;
         }
 
         .operators {
             width: 100%;
         }
+
+        .row:first-child button {
+    width: 10%; /* Adjust the width as needed */
+}
     </style>
 </head>
 <body>
 
+    
     <div id="calculator">
         <div class="title">Calculator</div>
-        <input type="text" id="display" readonly   placeholder="Temporary Display">
+        <input type="text" id="display" readonly placeholder="0">
         
+
+
         <div class="row">
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-        </div>
-        
-        <div class="row">
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-        </div>
-        
-        <div class="row">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
+            <button  onclick="handleButtonClick('MC')">MC</button>
+            <button onclick="handleButtonClick('MR')">MR</button>
+            <button onclick="handleButtonClick('M+')">M+</button>
+            <button onclick="handleButtonClick('M-')">M-</button>
+            <button onclick="handleButtonClick('MS')">MS</button>
+            <button onclick="handleButtonClick('M+')">M<sup>+</sup></button>
         </div>
 
         <div class="row">
-            <button>0</button>
-            <button>C</button>
-            <button>=</button>
+            <button onclick="handleButtonClick('2nd')">2<sup>nd</sup></button>
+            <button onclick="handleButtonClick('Math.PI')">&#120645;</button>
+            <button onclick="handleButtonClick('e')">e</button>
+            <button onclick="handleButtonClick('C')">C</button>
+            <button onclick="deleteDigit()">DEL</button>
+        </div>
+
+        <div class="row">
+            <button onclick="handleButtonClick('x^2')">x<sup>2</sup></button>
+            <button onclick="handleButtonClick('1/x')"><sup>1</sup>&frasl;x</button>
+            <button onclick="handleButtonClick('|x|')">|x|</button>
+            <button onclick="handleButtonClick('exp')">exp</button>
+            <button onclick="handleButtonClick('mod')">mod</button>
+        </div>
+
+        <div class="row">
+            <button onclick="handleButtonClick('sqrt')">2<sup>&radic;</sup>x</button>
+            <button onclick="handleButtonClick('(')">(</button>
+            <button onclick="handleButtonClick(')')">)</button>
+            <button onclick="handleButtonClick('n!')">n!</button>
+            <button onclick="handleButtonClick('/')">&#247;</button>
+        </div>
+
+        <div class="row">
+            <button onclick="handleButtonClick('xy')">x<sup>y</sup></button>
+            <button onclick="handleButtonClick('7')">7</button>
+            <button onclick="handleButtonClick('8')">8</button>
+            <button onclick="handleButtonClick('9')">9</button>
+            <button onclick="handleButtonClick('*')">*</button>
         </div>
         
-        <div class="row operators">
-            <button>+</button>
-            <button>-</button>
-            <button>*</button>
-            <button>/</button>
+        <div class="row">
+            <button onclick="handleButtonClick('x10')">x<sup>10</sup></button>
+            <button onclick="handleButtonClick('4')">4</button>
+            <button onclick="handleButtonClick('5')">5</button>
+            <button onclick="handleButtonClick('6')">6</button>
+            <button onclick="handleButtonClick('-')">-</button>
         </div>
+        
+        <div class="row">
+            <button onclick="handleButtonClick('log')">log</button>
+            <button onclick="handleButtonClick('1')">1</button>
+            <button onclick="handleButtonClick('2')">2</button>
+            <button onclick="handleButtonClick('3')">3</button>
+            <button onclick="handleButtonClick('+')">+</button>
+        </div>
+
+        <div class="row">
+            <button onclick="handleButtonClick('ln')">ln</button>
+            <button onclick="handleButtonClick('&plusmn;')">&plusmn;</button>
+            <button onclick="handleButtonClick('0')">0</button>
+            <button onclick="handleButtonClick('.')">.</button>
+            <button onclick="calculateResult()" style="background-color: #3498db; color: #fff;">=</button>
+        </div>
+       
     </div>
 
+    <script>
+        let displayValue = '0';
+    
+        function handleButtonClick(value) {
+            if (value === 'C') {
+                displayValue = '';
+            } else if (value === 'sqrt') {
+                displayValue = 'Math.sqrt(' + displayValue + ')';
+            } else if (value === 'xy') {
+                displayValue += '**';
+            } else if (value === '|x|') {
+                displayValue += '|';
+            } else if (value === '=') {
+                calculateResult();
+            } else {
+                if (displayValue === '0' || displayValue === 'Error') {
+                    displayValue = value;
+                } else {
+                    displayValue += value;
+                }
+            }
+            updateDisplay();
+        }
+    
+        function deleteDigit() {
+    if (displayValue.length > 0) {
+        displayValue = displayValue.substring(0, displayValue.length - 1);
+    } else {
+        displayValue = '';
+    }
+    updateDisplay();
+}
+
+    
+        function calculateResult() {
+    try {
+        // Handle the case where the result is inside "|" characters
+        if (displayValue.startsWith('|') && displayValue.endsWith('|')) {
+            displayValue = Math.abs(eval(displayValue.slice(1, -1))).toString();
+        } else {
+            displayValue = eval(displayValue).toString();
+        }
+    } catch (error) {
+        displayValue = 'Error';
+    }
+    updateDisplay();
+}
+
+
+    
+        function updateDisplay() {
+            document.getElementById('display').value = displayValue;
+        }
+    
+        document.addEventListener('keydown', function (event) {
+            const key = event.key;
+    
+            if (key >= '0' && key <= '9') {
+                handleButtonClick(key);
+            } else if (key === '+' || key === '-' || key === '*' || key === '/') {
+                handleButtonClick(key);
+            } else if (key === '.') {
+                handleButtonClick('.');
+            } else if (key === 'Enter') {
+                calculateResult();
+            } else if (key === 'Backspace') {
+                deleteDigit();
+                updateDisplay();
+            } else if (key === '|') {
+                handleButtonClick('|x|');
+            }
+        });
+    </script>
+    
 
 </body>
 </html>
